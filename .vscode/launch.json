@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - WebappApplication",
+            "request": "launch",
+            "mainClass": "com.bootstrapwithspringboot.webapp.WebappApplication",
+            "projectName": "webapp"
+        }
+    ]
+}
