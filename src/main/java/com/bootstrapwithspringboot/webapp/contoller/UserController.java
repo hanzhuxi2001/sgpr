@@ -1,5 +1,16 @@
 package com.bootstrapwithspringboot.webapp.contoller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import com.bootstrapwithspringboot.webapp.common.CodeUtil;
+import com.bootstrapwithspringboot.webapp.model.User;
+import com.bootstrapwithspringboot.webapp.service.UserService;
+
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,21 +18,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.annotation.Resource;
-
-import com.bootstrapwithspringboot.webapp.model.User;
-import com.bootstrapwithspringboot.webapp.service.UserService;
-
-import java.util.Date;
-import java.util.List;
-
 @Controller
 public class UserController {
 
     @Resource
     UserService userService;
-
-    String password="hanhui.citi";
+    //TODO change
+    String password="hanhui08";
 
     @RequestMapping("/")
     public String index() {
@@ -48,9 +51,13 @@ public class UserController {
     }
 
     @RequestMapping("/add")
-    public String add(User user) {
-        user.setAge("2018-08-08");
-        user.setUpdateDate("2018-08-08");
+    public String add(HttpServletRequest req,User user,Model model) {
+        if (!CodeUtil.checkVerifyCode(req)) {
+            return "redirect:/error";
+        } 
+        user.setAge("");
+        String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        user.setUpdateDate(formattedDate);
         userService.save(user);
         if(user.getType().equalsIgnoreCase("1")){
             return "redirect:/listPage";
@@ -80,8 +87,9 @@ public class UserController {
 
     @RequestMapping("/editSave")
     public String edit(User user) {
-        user.setAge("2018-08-08");
-        user.setUpdateDate("2018-08-08");
+        user.setAge("");
+        String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        user.setUpdateDate(formattedDate);
         userService.edit(user);
         if(user.getType().equalsIgnoreCase("1")){
             return "redirect:/listPage";

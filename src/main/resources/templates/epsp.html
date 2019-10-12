@@ -271,7 +271,7 @@ $(document).ready(function(){
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>增加一条例子</span></a>
-						<!--<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>删除</span></a>-->					
+						<!--<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>删除</span></a>-->						
 					</div>
                 </div>
             </div>
@@ -328,7 +328,7 @@ $(document).ready(function(){
 			<div class="modal-content">
 				<form class="form-horizontal"   th:action="@{/add}"  method="post">
 					<div class="modal-header">						
-						<h4 class="modal-title">请填写下面的PR申请信息</h4>
+						<h4 class="modal-title">请填写下面的EP工作准证申请信息</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						</div>
 					<div class="modal-body">					
@@ -337,16 +337,16 @@ $(document).ready(function(){
 							<input type="text" name="userName"  id="userName" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<label>生日</label>
+							<label>生日(修改更新会用到，例如MMDD)</label>
 							<input type="text" name="password"  id="password" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<label>申请时间</label>
-							<input class="datepicker" name="applyDate"  id="applyDate" data-date-format="mm/dd/yyyy" required>
+								<label>申请时间</label>
+								<input class="form-control" id="applyDate" name="applyDate" placeholder="yyyy-MM-dd" type="text"/>
 						</div>
 						<div class="form-group">
-							<label>结束时间</label>
-							<input class="datepicker" name="completedDate"  id="completedDate" data-date-format="mm/dd/yyyy" required>
+								<label>结束时间</label>
+								<input class="form-control" id="completedDate" name="completedDate" placeholder="yyyy-MM-dd" type="text"/>
 						</div>
 						<div class="form-group">
 							<label>条件</label>
@@ -355,15 +355,23 @@ $(document).ready(function(){
 						<div class="form-group">
 							<label>结果</label>
 							<select id="result" name="result">
-								<option value="pass">通过</option>
-								<option value="reject">杯具</option>
-								<option value="Pending">等待</option>
+								<option value="通过">通过</option>
+								<option value="杯具">杯具</option>
+								<option value="等待">等待</option>
 							</select>
 						</div>
+						<div class="form-group">
+								<label>验证码</label>
+								<input type="text" placeholder="请输入验证码" name="verifyCodeActual">
+								<div class="item-input">
+									<img id="captcha_img" alt="点击更换" title="点击更换"
+										onclick="refresh()" src="/kaptcha" />
+								</div>
+						</div>	
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input type="submit" class="btn btn-success" value="Add">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="取消">
+						<input type="submit" class="btn btn-success" value="确定">
 					</div>
 					<input type="hidden" id="type" name="type" value="3"> 
 
@@ -382,7 +390,7 @@ $(document).ready(function(){
 					</div>
 					<div class="modal-body">					
 								<div class="form-group">
-									<label>注册时输入的生日</label>
+									<label>注册时输入的生日(例如MMDD)</label>
 									<input type="text" name="birth"  id="birth" class="form-control" required>
 								</div>
 					</div>
@@ -417,15 +425,55 @@ $(document).ready(function(){
 	</div>
 
 </body>
+<!--formden.js communicates with FormDen server to validate fields and submit via AJAX -->
+<script type="text/javascript" src="https://formden.com/static/cdn/formden.js"></script>
+
+<!-- Special version of Bootstrap that is isolated to content wrapped in .bootstrap-iso -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!--Font Awesome (added because you use icons in your prepend/append)-->
+<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+<!-- Inline CSS based on choices in "Settings" tab -->
+<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
+
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
 <script>
         $('#deleteEmployeeModal').on('show.bs.modal', function(e) {
             $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href')+'&pass='+document.getElementById("pass").value);
         });	
 		$('#editEmployeeModal').on('show.bs.modal', function(e) {
             $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+		});	
+		$('#addEmployeeModal').on('show.bs.modal', function(e) {
+			refresh();
         });	
 		function click5(){
 			document.getElementById('editForm').action=document.getElementById("button1").getAttribute("href");
 		}
+		function refresh() {
+            document.getElementById('captcha_img').src="/kaptcha?"+Math.random();
+		}
+		$(document).ready(function(){
+		var date_input=$('input[name="applyDate"]'); //our date input has the name "date"
+		var date_input_end=$('input[name="completedDate"]'); //our date input has the name "date"
+		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+		date_input.datepicker({
+			format: 'yyyy-mm-dd',
+			container: container,
+			todayHighlight: true,
+			autoclose: true,
+		})
+		date_input_end.datepicker({
+			format: 'yyyy-mm-dd',
+			container: container,
+			todayHighlight: true,
+			autoclose: true,
+		})
+	})
 </script>
 </html>                                		                            
