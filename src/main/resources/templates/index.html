@@ -7,33 +7,20 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="testing">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico"/>
-
     <title>新加坡PR,Citizen,EP,SP统计查询</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">
-    <!-- Static navbar -->
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/listPage">PR</a></li>
-                    <li><a href="/citizen">Citizen</a></li>
-                    <li><a href="/ep">EP</a></li>
-                    <li><a href="/sp">SP</a></li>
-                </ul>
-
-            </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-    </nav>
-    <!-- Main component for a primary marketing message or call to action -->
-    
-</div> 
-
+        <ul class="nav nav-tabs">
+                <li class="active"><a href="/listPage">PR</a></li>
+                <li><a href="/citizen">Citizen</a></li>
+                <li><a href="/ep">EP</a></li>
+                <li><a href="/sp">SP</a></li>
+        </ul>
+ </div>
 <div class="container-fluid" th:replace="pr :: html"></div>
 
 <!-- Bootstrap core JavaScript

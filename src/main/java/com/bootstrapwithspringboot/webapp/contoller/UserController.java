@@ -24,7 +24,7 @@ public class UserController {
     @Resource
     UserService userService;
     //TODO change
-    String password="hanhui08";
+    String password="test";
 
     @RequestMapping("/")
     public String index() {
@@ -80,7 +80,7 @@ public class UserController {
         if(birth!=null&&birth.equalsIgnoreCase(user.getPassword())){
             return "edit";
         }else{
-            return "redirect:/listPage"; 
+            return "redirect:/error"; 
         }
         
     }

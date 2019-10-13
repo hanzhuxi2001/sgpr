@@ -15,25 +15,14 @@
     <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 </head>
 <body>
-<div class="container">
-    <!-- Static navbar -->
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/listPage">PR</a></li>
-                    <li><a href="/citizen">Citizen</a></li>
-                    <li><a href="/ep">EP</a></li>
-                    <li class="active"><a href="/sp">SP</a></li>
-
+        <div class="container">
+                <ul class="nav nav-tabs">
+                        <li ><a href="/listPage">PR</a></li>
+                        <li><a href="/citizen">Citizen</a></li>
+                        <li><a href="/ep">EP</a></li>
+                        <li class="active"><a href="/sp">SP</a></li>
                 </ul>
-
-            </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-    </nav>
-    <!-- Main component for a primary marketing message or call to action -->
-    
-</div> <!-- /container -->
+         </div>
 <div class="container-fluid" th:replace="sp :: html"></div>
 <!-- Bootstrap core JavaScript
 ================================================== -->
