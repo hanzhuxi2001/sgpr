@@ -56,7 +56,7 @@ public class UserController {
             return "redirect:/error";
         } 
         user.setAge("");
-        String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        String formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
         user.setUpdateDate(formattedDate);
         userService.save(user);
         if(user.getType().equalsIgnoreCase("1")){
@@ -88,7 +88,7 @@ public class UserController {
     @RequestMapping("/editSave")
     public String edit(User user) {
         user.setAge("");
-        String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        String formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
         user.setUpdateDate(formattedDate);
         userService.edit(user);
         if(user.getType().equalsIgnoreCase("1")){
