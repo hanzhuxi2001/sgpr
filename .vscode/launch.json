@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - importMoe",
+            "request": "launch",
+            "mainClass": "com.bootstrapwithspringboot.webapp.service.impl.importMoe",
+            "projectName": "webapp"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Import",
+            "request": "launch",
+            "mainClass": "com.bootstrapwithspringboot.webapp.service.impl.Import",
+            "projectName": "webapp"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - WebappApplication",
             "request": "launch",
             "mainClass": "com.bootstrapwithspringboot.webapp.WebappApplication",

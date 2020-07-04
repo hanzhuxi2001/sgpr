@@ -8,13 +8,16 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import com.bootstrapwithspringboot.webapp.common.CodeUtil;
+import com.bootstrapwithspringboot.webapp.model.School;
 import com.bootstrapwithspringboot.webapp.model.User;
+import com.bootstrapwithspringboot.webapp.service.SchoolService;
 import com.bootstrapwithspringboot.webapp.service.UserService;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,8 +26,11 @@ public class UserController {
 
     @Resource
     UserService userService;
+
+    @Resource
+    SchoolService schoolService;
     //TODO change
-    String password="test";
+    String password="xixi";
 
     @RequestMapping("/")
     public String index() {
@@ -133,14 +139,18 @@ public class UserController {
         }
         return "epIndex";
     }
-    @RequestMapping("/sp")
-    public String findBookNoQuerySP(ModelMap modelMap,@RequestParam(value = "page", defaultValue = "0") Integer page,
-                        @RequestParam(value = "size", defaultValue = "20") Integer size,String pass){
-        Page<User> datas = userService.findUserCriteria(page, size,"4");
+    @RequestMapping("/schools")
+    public String findBookNoQuerySP(Model modelMap){
+        List<String> datas = schoolService.findSchoolName();
         modelMap.addAttribute("datas", datas);
-        if(password.equalsIgnoreCase(pass)){
-            modelMap.addAttribute("isAdmin", "yes");
-        }
         return "spIndex";
+    }
+    @RequestMapping("/school")
+    public String findSchoolsBySchool(Model modelMap,String school ){
+        List<School> datas = schoolService.findSchoolBySchool(school);
+        modelMap.addAttribute("datas", datas);
+        modelMap.addAttribute("schoolName", school);
+
+        return "schoolIndex";
     }
 }

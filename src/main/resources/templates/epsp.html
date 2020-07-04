@@ -82,195 +82,36 @@ $(document).ready(function(){
 
         <div class="table-wrapper">
 				<div class="panel panel-primary">
-						<div class="panel-heading"><b>EP工作准证申请登记例子</b><a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>增加一条例子</span></a></div>
+						<div class="panel-heading"><b><p><span th:text="${schoolName}"></span></p></b></div>
 				 </div>
 			<div>
 			<table class="table table-striped table-hover table-bordered "> 
                 <thead>
                     <tr>
-						<th width=50>修改</th>
-                        <th width=80>用户名</th>
-                        <th width=320>条件</th>
-						<th width=60>结果</th>
-						<th width=100>申请日期</th>
-						<th width=100>结束日期</th>
-						<th width=160>更新时间</th>
+						<th>注册年</th>
+						<th>阶段</th>
+						<th>剩余位置</th>
+						<th>注册人数</th>
+						<th>成功率</th>
+
 					</tr>
                 </thead>
                 <tbody>
-                    <tr th:each="user : ${datas}">
-							<td>
-									<a href="#editEmployeeModal" th:data-href="@{/edit(id=${user.id})}" th:data-id="${user.id}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-										<a th:if="${isAdmin=='yes'}" th:data-href="@{/delete(id=${user.id})}" data-target="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"  data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-							</td>
-                        <td width=80 th:text="${user.userName}">Thomas Hardy</td>
-						<td width=320 th:text="${user.description}">条件很长，很长-------------==============================================-------------------------------很长</td>
-						<td width=60 th:text="${user.result}">通过</td>
-						<td width=100 th:text="${user.applyDate}">2018-07-09</td>
-						<td width=100 th:text="${user.completedDate}">2019-09-10</td>
-						<td width=160 th:text="${user.updateDate}">2019-09-08 23:45</td>
+                    <tr th:each="school : ${datas}">
+						<td th:text="${school.year}"></td>
+						<td th:text="${school.phase}"></td>
+						<td th:text="${school.availiability}"></td>
+						<td th:text="${school.registration}"></td>
+						<td th:text="${school.sucessRate}"></td>
+
 					</tr>
                 </tbody>
 			</table>
 			</div>
 		</div>
-		<div th:include="page :: pager" th:remove="tag"></div>
-
     </div>
-	<!-- Edit Modal HTML -->
-	<div id="addEmployeeModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form class="form-horizontal"   th:action="@{/add}"  method="post">
-					<div class="modal-header">						
-						<h4 class="modal-title">请填写下面的EP申请信息</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						</div>
-					<div class="modal-body">					
-						<div class="form-group">
-							<label>用户名</label>
-							<input type="text" name="userName"  id="userName" class="form-control" required>
-						</div>
-						<div class="form-group">
-							<label>生日(修改更新会用到，例如MMDD)</label>
-							<input type="text" name="password"  id="password" class="form-control" required>
-						</div>
-						<div class="form-group">
-								<label>申请时间</label>
-								<input class="form-control" id="applyDate" name="applyDate" placeholder="yyyy-MM-dd" type="text"/>
-						</div>
-						<div class="form-group">
-								<label>结束时间</label>
-								<input class="form-control" id="completedDate" name="completedDate" placeholder="yyyy-MM-dd" type="text"/>
-						</div>
-						<div class="form-group">
-							<label>条件</label>
-							<textarea name="description"  id="description" class="form-control" required></textarea>
-						</div>						
-						<div class="form-group">
-							<label>结果</label>
-							<select id="result" name="result">
-								<option value="通过">通过</option>
-								<option value="杯具">杯具</option>
-								<option value="等待">等待</option>
-								<option value="上诉中">上诉中</option>
-							</select>
-						</div>
-						<div class="form-group">
-								<label>验证码</label>
-								<input type="text" placeholder="请输入验证码" name="verifyCodeActual">
-								<div class="item-input">
-									<img id="captcha_img" alt="点击更换" title="点击更换"
-										onclick="refresh()" src="/kaptcha" />
-								</div>
-						</div>	
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="取消">
-						<input type="submit" class="btn btn-success" value="确定">
-					</div>
-					<input type="hidden" id="type" name="type" value="3"> 
-
-				</form>
-			</div>
-		</div>
-	</div>
-	<!-- Edit Modal HTML -->
-	<div id="editEmployeeModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form  method="post" name="editForm" id="editForm">
-
-					<div class="modal-header">						
-						<h4 class="modal-title">请输入您的密码</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">					
-								<div class="form-group">
-									<label>注册时输入的生日(例如MMDD)</label>
-									<input type="text" name="birth"  id="birth" class="form-control" required>
-								</div>
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="取消">
-						<input type="submit" class="btn btn-info btn-ok" id="button1" onClick="click5()" value="确认">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<!-- Delete Modal HTML -->
-	<div id="deleteEmployeeModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-					<div class="modal-header">						
-						<h4 class="modal-title">Delete Employee</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">					
-						<p>Are you sure you want to delete these Records?</p>
-						<p class="text-warning"><small>This action cannot be undone.</small></p>
-					</div>
-					<div class="modal-footer">
-							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-							<a class="btn btn-danger btn-ok">Delete</a>
-					</div>
-					<input type="hidden" th:value="${param.pass}" name="pass" id="pass"/>
-
-			</div>
-		</div>
-	</div>
 
 </body>
-<!--formden.js communicates with FormDen server to validate fields and submit via AJAX -->
-<script type="text/javascript" src="https://formden.com/static/cdn/formden.js"></script>
-
-<!-- Special version of Bootstrap that is isolated to content wrapped in .bootstrap-iso -->
-<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
-
-<!--Font Awesome (added because you use icons in your prepend/append)-->
-<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
-
-<!-- Inline CSS based on choices in "Settings" tab -->
-<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
 
 
-<!-- Include Date Range Picker -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-
-<script>
-        $('#deleteEmployeeModal').on('show.bs.modal', function(e) {
-            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href')+'&pass='+document.getElementById("pass").value);
-        });	
-		$('#editEmployeeModal').on('show.bs.modal', function(e) {
-            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-		});	
-		$('#addEmployeeModal').on('show.bs.modal', function(e) {
-			refresh();
-        });	
-		function click5(){
-			document.getElementById('editForm').action=document.getElementById("button1").getAttribute("href");
-		}
-		function refresh() {
-            document.getElementById('captcha_img').src="/kaptcha?"+Math.random();
-		}
-		$(document).ready(function(){
-		var date_input=$('input[name="applyDate"]'); //our date input has the name "date"
-		var date_input_end=$('input[name="completedDate"]'); //our date input has the name "date"
-		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-		date_input.datepicker({
-			format: 'yyyy-mm-dd',
-			container: container,
-			todayHighlight: true,
-			autoclose: true,
-		})
-		date_input_end.datepicker({
-			format: 'yyyy-mm-dd',
-			container: container,
-			todayHighlight: true,
-			autoclose: true,
-		})
-	})
-</script>
 </html>                                		                            
