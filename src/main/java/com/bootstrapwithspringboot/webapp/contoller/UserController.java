@@ -30,7 +30,7 @@ public class UserController {
     @Resource
     SchoolService schoolService;
     //TODO change
-    String password="xixi";
+    String password="haha";
 
     @RequestMapping("/")
     public String index() {
@@ -145,8 +145,9 @@ public class UserController {
         modelMap.addAttribute("datas", datas);
         return "spIndex";
     }
-    @RequestMapping("/school")
-    public String findSchoolsBySchool(Model modelMap,String school ){
+
+    @RequestMapping("/school/{school}")
+    public String findSchoolsBySchool(Model modelMap,@PathVariable("school") String school){
         List<School> datas = schoolService.findSchoolBySchool(school);
         modelMap.addAttribute("datas", datas);
         modelMap.addAttribute("schoolName", school);

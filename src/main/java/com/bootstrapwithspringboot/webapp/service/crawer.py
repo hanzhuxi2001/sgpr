@@ -11,13 +11,13 @@ import requests
 ##r = urlopen("/Users/hd/Downloads/spring/bootstrap-with-springboot-master/data/moePhase1.html")
 #bsObj=BeautifulSoup(r.text,'html.parser')
 #print (r.content)
-html=open("/Users/hd/Downloads/spring/bootstrap-with-springboot-master/data/moePhase1-1.html")
+html=open("/Users/hd/Documents/phase2a-1.html")
 bsObj=BeautifulSoup(html.read(),'html.parser')
 print("====================")
 #print (bsObj)
 
 title=bsObj.findAll({"div","moe-ballot-card m-b:m  "})
-with open("moe20201.csv","w") as csvfile: 
+with open("moe20202a1.csv","w") as csvfile: 
     writer = csv.writer(csvfile)
     ####写入Csv文件中
     #先写入columns_name
@@ -29,7 +29,7 @@ with open("moe20201.csv","w") as csvfile:
             #print(j)
             school=j.find("h3")
             if school != None:
-                #print(school.get_text())
+                print(school.get_text())
                 tds=j.findAll('p', attrs={'class' : 'info-data'})
                 if len(tds)==2: 
                     my_list = []
