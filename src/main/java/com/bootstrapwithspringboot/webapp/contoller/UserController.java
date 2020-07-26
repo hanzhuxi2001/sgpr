@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.bootstrapwithspringboot.webapp.common.CodeUtil;
 import com.bootstrapwithspringboot.webapp.model.School;
+import com.bootstrapwithspringboot.webapp.model.Schools;
 import com.bootstrapwithspringboot.webapp.model.User;
 import com.bootstrapwithspringboot.webapp.service.SchoolService;
 import com.bootstrapwithspringboot.webapp.service.UserService;
@@ -30,7 +31,7 @@ public class UserController {
     @Resource
     SchoolService schoolService;
     //TODO change
-    String password="haha";
+    String password="nana";
 
     @RequestMapping("/")
     public String index() {
@@ -141,7 +142,8 @@ public class UserController {
     }
     @RequestMapping("/schools")
     public String findBookNoQuerySP(Model modelMap){
-        List<String> datas = schoolService.findSchoolName();
+        //List<String> datas = schoolService.findSchoolName();
+        List<Schools> datas = schoolService.findAll();
         modelMap.addAttribute("datas", datas);
         return "spIndex";
     }
@@ -153,5 +155,13 @@ public class UserController {
         modelMap.addAttribute("schoolName", school);
 
         return "schoolIndex";
+    }
+
+    @RequestMapping("/region/{region}")
+    public String findSchoolsByRegion(Model modelMap,@PathVariable("region") String region){
+        List<School> datas = schoolService.findSchoolByRegion(region);
+        modelMap.addAttribute("datas", datas);
+        modelMap.addAttribute("schoolName", region);
+        return "regionIndex";
     }
 }

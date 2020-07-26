@@ -1,65 +1,11 @@
-body{
-    background: url(../img/background.jpg) no-repeat center center fixed;
-    background-size: cover;
+﻿
+/*返回顶部开始*/
+#code,#code_hover{width:40px;height:195px;background:url(../img/icon.png) no-repeat;position:fixed;right:50px;cursor:pointer;_position:absolute;_bottom:auto;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));}
+#code{background-position: -189px 0px;bottom:120px;_margin-bottom:120px;}
+#code_hover{background-position: -189px 0px;bottom:120px;_margin-bottom:120px;}
+#gotop{background-position:-276px -310px;bottom:67px;_margin-bottom:67px;
+    width:40px;height:40px;position:fixed;right:50px;cursor:pointer;_position:absolute;_bottom:auto;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));
 }
 
-.main-section{
-    margin:0 auto;
-    margin-top:25%;
-    padding: 0;
-}
-
-.modal-content{
-    background-color: #3b4652;
-    opacity: .85;
-    padding: 0 20px;
-    box-shadow: 0px 0px 3px #848484;
-}
-.user-img{
-    margin-top: -50px;
-    margin-bottom: 35px;
-}
-
-.user-img img{
-    width: 100xp;
-    height: 100px;
-    box-shadow: 0px 0px 3px #848484;
-    border-radius: 50%;
-}
-
-.form-group input{
-    height: 42px;
-    font-size: 18px;
-    border:0;
-    padding-left: 54px;
-    border-radius: 5px;
-}
-
-.form-group::before{
-    font-family: "Font Awesome\ 5 Free";
-    position: absolute;
-    left: 28px;
-    font-size: 22px;
-    padding-top:4px;
-}
-
-.form-group#user-group::before{
-    content: "\f007";
-}
-
-.form-group#contrasena-group::before{
-    content: "\f023";
-}
-
-button{
-    width: 60%;
-    margin: 5px 0 25px;
-}
-
-.forgot{
-    padding: 5px 0;
-}
-
-.forgot a{
-    color: white;
-}
+#code_img{width:270px;height:355px;background: url(../img/icon.png) 92px 109px no-repeat;position:fixed;right:90px;bottom:67px;cursor:pointer;display:none;_position:absolute;_bottom:auto;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));_margin-bottom:67px;}
+/*返回顶部结束*/

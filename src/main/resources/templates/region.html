@@ -94,7 +94,7 @@ function myFunction() {
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[0];
-	  td1 = tr[i].getElementsByTagName("td")[1];
+	  td1 = tr[i].getElementsByTagName("td")[2];
     if (td) {
       txtValue = td.innerText.toString()+td1.innerText.toString();
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -122,20 +122,21 @@ function myFunction() {
     <img src="/img/ftwx.jpg" align="middle" hspace="0" vspace="0" width="50" height="50"> 
   </div>
 			<div>
-			<input type="text" id="myInput" onkeyup="myFunction()" placeholder="输入注册年或者报名阶段搜索" title="Type in a name">
+			<input type="text" id="myInput" onkeyup="myFunction()" placeholder="输入学校阶段搜索" title="Type in a name">
 			<table id="myTable" class="table table-striped table-hover table-bordered "> 
                 <thead>
                     <tr>
-						<th width=18.75%>注册年</th>
-						<th width=25%>阶段</th>
-						<th width=18.75%>剩余位</th>
-						<th width=18.75%>注册数</th>
-						<th width=18.75%>成功率</th>
-
+						<th width=40%>学校</th>
+						<th width=15%>注册年</th>
+						<th width=15%>阶段</th>
+						<th width=12%>剩余位</th>
+						<th width=12%>注册数</th>
+						<th width=15%>成功率</th>
 					</tr>
                 </thead>
                 <tbody>
                     <tr th:each="school : ${datas}">
+						<td> <a th:text="${school.School}" th:href="@{/school/{school}(school = ${school.school})}"></a></td>
 						<td th:text="${school.year}"></td>
 						<td th:text="${school.phase}"></td>
 						<td th:text="${school.availiability}"></td>

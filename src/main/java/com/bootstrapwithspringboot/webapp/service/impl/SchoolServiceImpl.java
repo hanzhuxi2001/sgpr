@@ -3,6 +3,8 @@ package com.bootstrapwithspringboot.webapp.service.impl;
 import java.util.List;
 
 import com.bootstrapwithspringboot.webapp.model.School;
+import com.bootstrapwithspringboot.webapp.model.Schools;
+import com.bootstrapwithspringboot.webapp.repository.SchoolRegionRepository;
 import com.bootstrapwithspringboot.webapp.repository.SchoolRepository;
 import com.bootstrapwithspringboot.webapp.service.SchoolService;
 
@@ -19,10 +21,21 @@ public class SchoolServiceImpl implements SchoolService {
     private SchoolRepository schoolRepository;
 
     @Autowired
+    private SchoolRegionRepository schoolRegionRepository;
+
+    @Autowired
     JdbcTemplate jdbcTemplate;
 
     public List<School> findSchoolBySchool(String school) {
         return schoolRepository.findBySchool(school,Sort.by(Sort.Direction.DESC, "year").and(Sort.by("phase")));
+    }
+
+    public List<Schools> findAll() {
+        return schoolRegionRepository.findAll();
+    }
+
+    public List<School> findSchoolByRegion(String region) {
+        return schoolRepository.queryRegion(region);
     }
 
     public List<String> findSchoolName() {
