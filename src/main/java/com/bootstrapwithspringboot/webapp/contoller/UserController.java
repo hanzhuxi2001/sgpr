@@ -31,7 +31,7 @@ public class UserController {
     @Resource
     SchoolService schoolService;
     //TODO change
-    String password="nana";
+    String password="nono";
 
     @RequestMapping("/")
     public String index() {
@@ -47,7 +47,7 @@ public class UserController {
 
     @RequestMapping("/listPage")
     public String findBookNoQuery(ModelMap modelMap,@RequestParam(value = "page", defaultValue = "0") Integer page,
-                        @RequestParam(value = "size", defaultValue = "20") Integer size,String pass){
+                        @RequestParam(value = "size", defaultValue = "500") Integer size,String pass){
         //Page<User> datas = userService.findUserNoCriteria(page, size);
         Page<User> datas = userService.findUserCriteria(page, size,"1");
         modelMap.addAttribute("datas", datas);
@@ -106,7 +106,9 @@ public class UserController {
             return "redirect:/ep";
         }else if(user.getType().equalsIgnoreCase("4")){
             return "redirect:/sp";
-        }
+        }else if(user.getType().equalsIgnoreCase("5")){
+        return "redirect:/job";
+    }
         return "redirect:/listPage";
     }
 
@@ -121,7 +123,7 @@ public class UserController {
 
     @RequestMapping("/citizen")
     public String findBookNoQueryCitizen(ModelMap modelMap,@RequestParam(value = "page", defaultValue = "0") Integer page,
-                        @RequestParam(value = "size", defaultValue = "20") Integer size,String pass){
+                        @RequestParam(value = "size", defaultValue = "500") Integer size,String pass){
         Page<User> datas = userService.findUserCriteria(page, size,"2");
         modelMap.addAttribute("datas", datas);
         if(password.equalsIgnoreCase(pass)){
@@ -132,7 +134,7 @@ public class UserController {
 
     @RequestMapping("/ep")
     public String findBookNoQueryEP(ModelMap modelMap,@RequestParam(value = "page", defaultValue = "0") Integer page,
-                        @RequestParam(value = "size", defaultValue = "20") Integer size,String pass){
+                        @RequestParam(value = "size", defaultValue = "500") Integer size,String pass){
         Page<User> datas = userService.findUserCriteria(page, size,"3");
         modelMap.addAttribute("datas", datas);
         if(password.equalsIgnoreCase(pass)){

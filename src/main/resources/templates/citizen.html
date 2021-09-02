@@ -47,6 +47,23 @@
 		font-weight: normal;
 	}	
 </style>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		#myInput {
+			background-image: url('https://www.w3schools.com/css/searchicon.png');
+			background-position: 10px 10px;
+			background-repeat: no-repeat;
+			width: 100%;
+			font-size: 14px;
+			padding: 12px 20px 12px 40px;
+			border: 1px solid #ddd;
+			margin-bottom: 12px;
+		}
+	</style>
+
 <script type="text/javascript">
 $(document).ready(function(){
 	// Activate tooltip
@@ -74,6 +91,29 @@ $(document).ready(function(){
 // Data Picker Initialization
 
 </script>
+
+	<script>
+		function myFunction() {
+			var input, filter, table, tr, td, i, txtValue,td1;
+			input = document.getElementById("myInput");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[0];
+				td1 = tr[i].getElementsByTagName("td")[1];
+				if (td) {
+					txtValue = td.innerText.toString()+td1.innerText.toString();
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+	</script>
+
 </head>
 <body>
 		<!-- Go to www.addthis.com/dashboard to customize your tools --><script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5dfdc121a93eb49f"></script>
@@ -84,13 +124,14 @@ $(document).ready(function(){
 				<div class="panel panel-primary">
 						<div class="panel-heading"><b>公民申请登记例子</b><a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>增加一条例子</span></a></div>
 				 </div>
-  <div class="alert alert-info">
+  <!--<div class="alert alert-info">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>广告:</strong> 站长自营，新加坡专柜正品折扣化妆品/日/韩代，请加微信"hanshops"或扫码
-    <img src="/img/ftwx.jpg" align="middle" hspace="0" vspace="0" width="50" height="50"> 
-  </div>
+	  欢迎大家关注网站同名公众号sgprapp，不定期推送网站最新成功失败例子，请微信扫码
+    <img src="/img/ftwx.jpg" align="middle" hspace="0" vspace="0" width="50" height="50">
+  </div>-->
 			<div>
-			<table class="table table-striped table-hover table-bordered "> 
+				<input type="text" id="myInput" onkeyup="myFunction()" placeholder="输入用户名搜索当前页面" title="Type in User Name">
+				<table id="myTable" class="table table-striped table-hover table-bordered ">
                 <thead>
                     <tr>
 						<th width=50>修改</th>

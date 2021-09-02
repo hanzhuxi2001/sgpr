@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Add Employee</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+ 
+<body>
+    <div class="container my-5">
+            <div class="alert alert-info">
+                    <strong>修改内推信息</strong>
+            </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-10">
+                        <form th:action="@{/editSave}" th:object="${user}"  method="post">
+                            <div class="modal-header">						
+                                    <div class="panel panel-default">
+                                            <div class="panel-body">修改</div>
+                                    </div>
+                                <button type="button" onclick="window.history.go(-1); return false;" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body">					
+                                    <div class="form-group">
+                                            <label>公司名字</label>
+                                            <input type="text" th:field="*{userName}" name="userName"  id="userName" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>修改密码</label>
+                                            <input type="text" th:field="*{password}" name="password"  id="password" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>岗位名称</label>
+                                            <input type="text" th:field="*{applyDate}" name="applyDate"  id="applyDate" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>简历投递截止时间</label>
+                                            <input class="form-control" th:field="*{completedDate}" id="completedDate" name="completedDate" type="text"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>岗位要求信息</label>
+                                            <textarea name="description"  rows="8" th:field="*{description}" id="description" class="form-control" required></textarea>
+                                        </div>						
+                                        <div class="form-group">
+                                            <label>投递方式</label>
+                                            <input class="form-control" th:field="*{result}" id="result" name="result" type="text"/>
+                                        </div>				
+                            </div>
+                            <div class="modal-footer">
+                                <input type="button" class="btn btn-default" onclick="window.history.go(-1); return false;" data-dismiss="modal" value="取消">
+                                <input type="submit" class="btn btn-info" value="确定">
+                            </div>
+                            <input type="hidden" id="id" th:field="*{id}">
+                            <input type="hidden" id="type" th:field="*{type}"> 
+
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!--formden.js communicates with FormDen server to validate fields and submit via AJAX -->
+<script type="text/javascript" src="https://formden.com/static/cdn/formden.js"></script>
+
+<!-- Special version of Bootstrap that is isolated to content wrapped in .bootstrap-iso -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!--Font Awesome (added because you use icons in your prepend/append)-->
+<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+<!-- Inline CSS based on choices in "Settings" tab -->
+<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
+
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<script>
+        $(document).ready(function(){
+            var date_input_end=$('input[name="completedDate"]'); //our date input has the name "date"
+            var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+            date_input_end.datepicker({
+                format: 'yyyy-mm-dd',
+                container: container,
+                todayHighlight: true,
+                autoclose: true,
+            })
+        })
+    </script>
+</html>

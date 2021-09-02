@@ -1,6 +1,8 @@
 package com.bootstrapwithspringboot.webapp.service.impl;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+
 import java.util.List;
 
 import javax.persistence.criteria.Predicate;
@@ -51,14 +53,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<User> findUserNoCriteria(int page, int size) {
-        Sort sort = new Sort(Direction.DESC, "id");
+        Sort sort = new Sort(Direction.DESC, "updateDate");
         Pageable pageable = PageRequest.of(page, size, sort);
         return userRepository.findAll(pageable);
     }
 
     @Override
     public Page<User> findUserCriteria(int page, int size, String type) {
-        Sort sort = new Sort(Direction.DESC, "id");
+        Sort sort = new Sort(Direction.DESC, "updateDate");
         Pageable pageable = PageRequest.of(page, size, sort);
 
         Specification<User> specification = (root, criteriaQuery, cb) -> {
